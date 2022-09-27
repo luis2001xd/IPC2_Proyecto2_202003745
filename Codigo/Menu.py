@@ -80,14 +80,15 @@ class menu:
 
         opcion = ""
 
-        while opcion !=5:
+        while opcion !=6:
             print(Fore.BLUE+Back.BLUE+"-------Bienvenido al menú de configuración de la empresa-------"+Back.RESET)
             print("\n")
-            print(Fore.BLUE+"1. Limpiar sistema")
-            print("2. Cargar Archivo")
-            print("3. Crear nueva empresa")
-            print("4. Cargar archivo con configuración inicial para la prueba")
-            print("5. Salir")
+            print(Fore.BLUE+"1. Ver estado del punto de atención")
+            print("2. Activar escritorio de servicio")
+            print("3. Desactivar escritorio")
+            print("4. Atender cliente")
+            print("5. Solicitud de atención")
+            print("6. Simular actividad de punto de atención")
             print("\n")
             print("------Seleccione una opcion-------")
             opcion = int(input())
@@ -95,4 +96,7 @@ class menu:
             if opcion == 1:
                 print("Este es el menú de configuracion")
 
+
+    def cargar_configuracion(self):
+        pass
 menu()
