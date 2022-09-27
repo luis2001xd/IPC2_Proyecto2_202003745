@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<listadoInicial>
+    <configInicial id="2458" idEmpresa="1245" idPunto="2543">
+        <escritoriosActivos>
+            <escritorio idEscritorio="2109"/>
+            <escritorio idEscritorio="2209"/>
+        </escritoriosActivos>
+        <listadoClientes>
+            <cliente dpi="30201868">
+                <nombre> Luis Antonio Castillo </nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="4587" cantidad="1000"/>
+                    <transaccion idTransaccion="2158" cantidad="3000"/>
+                </listadoTransacciones>
+            </cliente>
+        </listadoClientes>
+    </configInicial>
+
+    <configInicial id="1235" idEmpresa="4105" idPunto="2345">
+        <escritoriosActivos>
+            <escritorio idEscritorio="4789"/>
+            <escritorio idEscritorio="4125"/>
+        </escritoriosActivos>
+        <listadoClientes>
+            <cliente dpi="302159">
+                <nombre> Jessica Morales </nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="3692" cantidad="2000"/>
+                    <transaccion idTransaccion="1254" cantidad="4000"/>
+                </listadoTransacciones>
+            </cliente>
+        </listadoClientes>
+    </configInicial>
+
+    <configInicial id="2879" idEmpresa="5879" idPunto="2458">
+        <escritoriosActivos>
+            <escritorio idEscritorio="8596"/>
+            <escritorio idEscritorio="4759"/>
+        </escritoriosActivos>
+        <listadoClientes>
+            <cliente dpi="4587412">
+                <nombre> Alejandro Morales </nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2516" cantidad="3000"/>
+                    <transaccion idTransaccion="3657" cantidad="1000"/>
+                </listadoTransacciones>
+            </cliente>
+        </listadoClientes>
+    </configInicial>
+</listadoInicial>
