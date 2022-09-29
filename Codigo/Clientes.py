@@ -1,7 +1,10 @@
+from Transacciones import lista_transacciones
+
 class clientes:
     def __init__(self,dpi,nombre):
         self.dpi = dpi
         self.nombre = nombre
+        self.transacciones = lista_transacciones ()
 
 class nodo_clientes:
     def __init__(self, cliente : clientes,siguiente = None):
@@ -25,4 +28,14 @@ class lista_clientes:
 
             nuevo_cliente = nodo_clientes (cliente = cliente)
             nodoaux.siguiente = nuevo_cliente
+
+
+    def imprimir(self):
+        nodoaux = self.primero
+
+        while nodoaux != None:
+            print("Cliente",nodoaux.cliente.nombre)
+            print("Transacciones: ")
+            nodoaux.cliente.transacciones.imprimir()
+            nodoaux = nodoaux.siguiente
 

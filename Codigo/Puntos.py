@@ -1,10 +1,12 @@
 from Escritorios import lista_escritorios
+from Clientes import lista_clientes
 class puntos:
     def __init__(self,id,nombre,direccion):
         self.id = id
         self.nombre = nombre
         self.direccion = direccion
         self.escritorios = lista_escritorios()
+        self.cliente = lista_clientes ()
 
 
 class nodo_puntos:
@@ -31,4 +33,36 @@ class lista_puntos:
 
             nuevo_nodo = nodo_puntos(puntos = puntos)
             nodoaux.siguiente = nuevo_nodo
+
+
+    def imprimir(self):
+
+        nodoaux = self.primero 
+
+        x=1
+        while nodoaux != None:
+
+            print("\n")
+            print("--------Punto No."+str(x)+"-------------")
+            print ("ID del punto:",nodoaux.puntos.id,", Nombre del punto:",nodoaux.puntos.nombre,", Dirección del punto:",nodoaux.puntos.direccion)
+            print("\n")
+            print("-----Información de los escritorios del punto-----")
+            nodoaux.puntos.escritorios.imprimir()
+            nodoaux = nodoaux.siguiente
+            x+=1
+
+
+    def buscar_punto(self, id):
+
+        nodoaux = self.primero
+
+        while nodoaux.puntos.id != id:
+
+            if nodoaux.siguiente != None:
+                nodoaux = nodoaux.siguiente
+            else:
+                print ("Punto no encontrado")
+                return None
+
+        return nodoaux
 

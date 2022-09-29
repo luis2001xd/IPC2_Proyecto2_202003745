@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<listaEmpresas>
+    <empresa id="2345">
+        <nombre>MCdonalds</nombre>
+        <abreviatura>Mc</abreviatura>
+        <listaPuntosAtencion>
+            <puntoAtencion id="2189">
+                <nombre>Punto1</nombre>
+                <direccion>3ra avenida</direccion>
+                <listaEscritorios>
+                    <escritorio id="8478">
+                        <identificacion>Mi</identificacion>
+                        <encargado>Luis</encargado>
+                    </escritorio>
+
+
+                    <escritorio id="2398">
+                        <identificacion>KL</identificacion>
+                        <encargado>Antonio</encargado>
+                    </escritorio>
+                </listaEscritorios>
+            </puntoAtencion>
+
+            <puntoAtencion id="7894">
+                <nombre>Punto2</nombre>
+                <direccion>4ta avenida</direccion>
+                <listaEscritorios>
+                    <escritorio id="4578">
+                        <identificacion>ki</identificacion>
+                        <encargado>Jessica</encargado>
+                    </escritorio>
+
+                    <escritorio id="9147">
+                        <identificacion>MO</identificacion>
+                        <encargado>Alejandra</encargado>
+                    </escritorio>
+
+                </listaEscritorios>
+            </puntoAtencion>
+        </listaPuntosAtencion>
+
+        <listaTransacciones>
+            <transaccion id="2587">
+                <nombre>Transaccion 1</nombre>
+                <tiempoAtencion>10</tiempoAtencion>
+            </transaccion>
+
+            <transaccion id="2314">
+                <nombre>Transaccion 2</nombre>
+                <tiempoAtencion>20</tiempoAtencion>
+            </transaccion>
+        
+
+        </listaTransacciones>
+    </empresa>
+
+
+    <empresa id="3195">
+        <nombre>Burguer king</nombre>
+        <abreviatura>Bg</abreviatura>
+        <listaPuntosAtencion>
+
+            <puntoAtencion id="5878">
+                <nombre>Punto6</nombre>
+                <direccion>7ma avenida</direccion>
+                <listaEscritorios>
+                    <escritorio id="6521">
+                        <identificacion>OP</identificacion>
+                        <encargado>Oscar</encargado>
+                    </escritorio>
+
+
+                    <escritorio id="3147">
+                        <identificacion>SW</identificacion>
+                        <encargado>Mario</encargado>
+                    </escritorio>
+                </listaEscritorios>
+            </puntoAtencion>
+
+            <puntoAtencion id="2136">
+                <nombre>Punto7</nombre>
+                <direccion>10ma avenida</direccion>
+                <listaEscritorios>
+                    <escritorio id="1234">
+                        <identificacion>JU</identificacion>
+                        <encargado>Maria</encargado>
+                    </escritorio>
+
+                    <escritorio id="4789">
+                        <identificacion>LU</identificacion>
+                        <encargado>Veronica</encargado>
+                    </escritorio>
+
+                </listaEscritorios>
+            </puntoAtencion>
+        </listaPuntosAtencion>
+
+        <listaTransacciones>
+            <transaccion id="2587">
+                <nombre>Transaccion 1</nombre>
+                <tiempoAtencion>10</tiempoAtencion>
+            </transaccion>
+
+            <transaccion id="2314">
+                <nombre>Transaccion 2</nombre>
+                <tiempoAtencion>20</tiempoAtencion>
+            </transaccion>
+
+
+            <transaccion id="8564">
+                <nombre>Transaccion 9</nombre>
+                <tiempoAtencion>21</tiempoAtencion>
+            </transaccion>
+        </listaTransacciones>      
+      
+    </empresa>
+
+</listaEmpresas>

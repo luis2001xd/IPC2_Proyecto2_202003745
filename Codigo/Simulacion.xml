@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<listadoInicial>
+    <configInicial id="2598" idEmpresa="2345" idPunto="7894">
+        <escritoriosActivos>
+            <escritorio idEscritorio="2109"/>
+            <escritorio idEscritorio="2209"/>
+        </escritoriosActivos>
+        <listadoClientes>
+            <cliente dpi="30201868">
+                <nombre>Luis Antonio Castillo</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="1000"/>
+                    <transaccion idTransaccion="2314" cantidad="3000"/>
+                </listadoTransacciones>
+            </cliente>
+        </listadoClientes>
+    </configInicial>
+
+    <configInicial id="1235" idEmpresa="3195" idPunto="5878">
+        <escritoriosActivos>
+            <escritorio idEscritorio="4789"/>
+            <escritorio idEscritorio="4125"/>
+        </escritoriosActivos>
+        <listadoClientes>
+            <cliente dpi="302159">
+                <nombre>Jessica Morales</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="2000"/>
+                    <transaccion idTransaccion="2314" cantidad="4000"/>
+                </listadoTransacciones>
+            </cliente>
+        </listadoClientes>
+    </configInicial>
+</listadoInicial>
