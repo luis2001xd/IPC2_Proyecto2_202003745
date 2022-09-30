@@ -1,0 +1,91 @@
+<listaEmpresas>
+
+    <empresa id="empresaSimixd">
+        <nombre> Doctor Simi </nombre>
+        <abreviatura> farmacias simi </abreviatura>
+
+        <listaPuntosAtencion>
+            <puntoAtencion id="P1">
+                <nombre> Punto 1 </nombre>
+                <direccion> Flores del lago </direccion>
+                <listaEscritorios>
+                    <escritorio id="E1">
+                        <identificacion> 3760 </identificacion>
+                        <encargado> Carlos </encargado>
+                    </escritorio>
+                    <escritorio id="E2">
+                        <identificacion> 8709 </identificacion>
+                        <encargado> Pedro </encargado>
+                    </escritorio>
+                    <escritorio id="E3">
+                        <identificacion> 9185 </identificacion>
+                        <encargado> Juan </encargado>
+                    </escritorio>
+                </listaEscritorios>
+            </puntoAtencion>
+
+            <puntoAtencion id="P2">
+                <nombre> Punto 2 </nombre>
+                <direccion> Amatitlán </direccion>
+                <listaEscritorios>
+                    <escritorio id="E1">
+                        <identificacion> A05 </identificacion>
+                        <encargado> Luis </encargado>
+                    </escritorio>
+                </listaEscritorios>
+                <listaEscritorios>
+                    <escritorio id="E2">
+                        <identificacion> A06 </identificacion>
+                        <encargado> Rafa </encargado>
+                    </escritorio>
+                </listaEscritorios>
+            </puntoAtencion>
+        </listaPuntosAtencion>
+
+        <listaTransacciones>
+            <transaccion id="AtC">
+                <nombre> Despacho medicina </nombre>
+                <tiempoAtencion> 5 </tiempoAtencion>
+            </transaccion>
+            <transaccion id="AtC2">
+                <nombre> Busqueda </nombre>
+                <tiempoAtencion> 3 </tiempoAtencion>
+            </transaccion>
+        </listaTransacciones>
+
+    </empresa>
+
+    <empresa id="empresaPitzapitza">
+        <nombre> Pitza pitza </nombre>
+        <abreviatura> la mas veloz </abreviatura>
+
+        <listaPuntosAtencion>
+            <puntoAtencion id="P1">
+                <nombre> Punto 1 </nombre>
+                <direccion> Miraflores </direccion>
+                <listaEscritorios>
+                    <escritorio id="E1">
+                        <identificacion> A01 </identificacion>
+                        <encargado> Claudia </encargado>
+                    </escritorio>
+
+                    <escritorio id="E2">
+                        <identificacion> A002 </identificacion>
+                        <encargado> Pancho </encargado>
+                    </escritorio>
+                </listaEscritorios>
+
+            </puntoAtencion>
+        </listaPuntosAtencion>
+
+        <listaTransacciones>
+            <transaccion id="AtC4">
+                <nombre> Despacho pitza </nombre>
+                <tiempoAtencion> 10 </tiempoAtencion>
+            </transaccion>
+        </listaTransacciones>
+
+    </empresa>
+
+
+    </listaEmpresas>

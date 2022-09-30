@@ -1,9 +1,10 @@
 from Transacciones import lista_transacciones
 
 class clientes:
-    def __init__(self,dpi,nombre):
+    def __init__(self,dpi,nombre,estado):
         self.dpi = dpi
         self.nombre = nombre
+        self.estado = estado
         self.transacciones = lista_transacciones ()
 
 class nodo_clientes:
@@ -34,8 +35,31 @@ class lista_clientes:
         nodoaux = self.primero
 
         while nodoaux != None:
-            print("Cliente",nodoaux.cliente.nombre)
+            print("Cliente:",nodoaux.cliente.nombre,", Estado:",nodoaux.cliente.estado)
             print("Transacciones: ")
             nodoaux.cliente.transacciones.imprimir()
             nodoaux = nodoaux.siguiente
+
+    def retornar_sin_atender(self):
+
+        nodoaux = self.primero
+
+        while nodoaux.cliente.estado != "Sin atender":
+            if nodoaux.siguiente != None:
+                nodoaux = nodoaux.siguiente
+            else: 
+                print ("Todos los clientes han sido atendidos")
+                return None
+
+
+        return nodoaux
+
+    def contar_sin_atender(self):
+        contador = 0
+        nodoaux = self.primero
+
+        while nodoaux != None:
+            if nodoaux.cliente.estado == "Sin atender":
+                contador += 1
+                
 

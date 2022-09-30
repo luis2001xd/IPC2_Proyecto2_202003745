@@ -2,7 +2,7 @@ from colorama import Back, Fore,Style
 import xml.etree.ElementTree as ET
 from Empresa import lista_empresa, empresa
 from Puntos import lista_puntos, puntos
-from Escritorios import lista_escritorios, escritorios
+from Escritorios import lista_escritorios, escritorios,nodo_escritorios
 from Transacciones import lista_transacciones, transacciones
 from Clientes import lista_clientes, clientes
 
@@ -26,13 +26,13 @@ class menu:
         print("\n")
         
         #Menú principal
-        while opcion != 4:
+        while opcion != 3:
 
             print(Fore.CYAN+Back.CYAN+"------------Bienvenido al menu principal------------"+Back.RESET)
             print("\n")
             print(Fore.CYAN+"1. Configuración de Empresas")
             print("2. Selección de empresa y manejos de puntos de atención")
-            print("4. Salir")
+            print("3. Salir")
             print("\n")
             print("------Seleccione una opcion-------")
             opcion = int(input())
@@ -88,22 +88,90 @@ class menu:
 
 
 
-    #selección de empresa
+
+
+    #Manejo y selección de empresas y puntos
 
     def manejo_empresa(self):
         opcion = ""
 
         while opcion !=2:
-            print(Fore.MAGENTA+Back.MAGENTA+"-------Bienvenido al menú de selección de empresa-------"+Back.RESET)
+            print(Fore.BLUE+Back.BLUE+"-------Bienvenido al menú de selección de empresa-------"+Back.RESET)
             print("\n")
-            print(Fore.MAGENTA+"1. Elegir empresa")
+            print(Fore.BLUE+"1. Elegir empresa")
             print("2. Salir")
             print("\n")
             print("------Seleccione una opcion-------")
             opcion = int(input())
 
+            if opcion == 1:
+                self.empresa.imprimir()
+                print("\n")
+                opcion2 = input("Introduzca el ID de la empresa que desea manejar: \n")
+                empresa_buscada = self.empresa.buscar_id(opcion2)
 
-    #Manejo de puntos
+                if empresa_buscada == None:
+                    print("No se encontró la empresa")
+                else:
+                    empresa_buscada.empresa.puntos_atencion.imprimir()
+                    print("\n")
+
+                    opcion3 = input("Introduzca el ID del punto que desea manejar: \n")
+                    punto_buscado = empresa_buscada.empresa.puntos_atencion.buscar_punto(opcion3)
+
+                    if punto_buscado == None:
+                        print("No se encontró el punto en la empresa ")
+                    
+                    else: 
+                        self.manejo_puntos(punto_buscado)
+
+
+
+    
+
+
+    def manejo_puntos(self, punto_buscado):
+        opcion = ""
+        punto_buscado = punto_buscado
+       
+        while opcion !=7:
+            print(Fore.BLUE+Back.BLUE+"-------Bienvenido al menú de manejo de puntos-------"+Back.RESET)
+            print("\n")
+            print(Fore.BLUE+"1. Ver estado del punto de atención")
+            print("2. Activar escritorio de servicio")
+            print("3. Desactivar Escritorio")
+            print("4. Atender cliente")
+            print("5. Solicitud de atención")
+            print("6. Simular actividad del punto de atención")
+            print("7. Salir")
+            opcion = int(input())
+
+            if opcion == 2:
+                self.activar_escritorio(punto_buscado)
+                punto_buscado.puntos.escritorios.imprimir()
+
+            if opcion == 3:
+                self.desactivar_escritorio(punto_buscado)
+                punto_buscado.puntos.escritorios.imprimir()
+
+
+            if opcion == 4:
+                self.atender_cliente(punto_buscado)
+                punto_buscado.puntos.escritorios.imprimir()
+                print("------------------")
+                punto_buscado.puntos.cliente.imprimir()
+
+            if opcion == 5:
+                punto_buscado.puntos.escritorios.imprimir()
+                
+
+
+
+
+
+
+
+
 
     
 
@@ -130,8 +198,9 @@ class menu:
             for transaccion in nueva_empresa.iter("transaccion"):
 
 
-                transaccion_nueva = transacciones(transaccion.attrib["id"], transaccion.find("nombre").text,transaccion.find("tiempoAtencion").text)
+                transaccion_nueva = transacciones(transaccion.attrib["id"], transaccion.find("nombre").text,int(transaccion.find("tiempoAtencion").text))
                 empresa_nueva.transacciones.agregar(transaccion_nueva)
+
 
 
 
@@ -205,10 +274,13 @@ class menu:
             nombre_transaccion = input("Introduzca el nombre de la transaccion: ")
             tiempo = input ("Introduzca el tiempo de la transaccion: ")
 
-            transaccion_nueva = transacciones(id_transaccion, nombre_transaccion, tiempo)
+            transaccion_nueva = transacciones(id_transaccion, nombre_transaccion, int(tiempo))
             empresa_nueva.transacciones.agregar(transaccion_nueva)
 
             k+=1
+
+
+
 
     def cargar_simulacion(self,ruta):
 
@@ -224,24 +296,84 @@ class menu:
             punto_buscado = empresa_buscada.empresa.puntos_atencion.buscar_punto(config_inicial.attrib["idPunto"])
 
             for escritorios in config_inicial.iter("escritorio"):
-                punto_buscado.puntos.escritorios.activar_escritorios()
+                punto_buscado.puntos.escritorios.activar_por_id(escritorios.attrib["idEscritorio"])
 
             for cliente in config_inicial.iter("cliente"):
                 
-                cliente_nuevo = clientes(cliente.attrib["dpi"],cliente.find("nombre").text)
+                cliente_nuevo = clientes(cliente.attrib["dpi"],cliente.find("nombre").text,"Sin atender")
                 punto_buscado.puntos.cliente.agregar(cliente_nuevo)
 
                 for transaccion in cliente.iter("transaccion"):
                     transaccion_buscada = empresa_buscada.empresa.transacciones.buscar_transaccion(transaccion.attrib["idTransaccion"])
-                    nueva_transaccion = transacciones(transaccion_buscada.transacciones.id, transaccion_buscada.transacciones.nombre, transaccion_buscada.transacciones.minutos,"luis")
+                    nueva_transaccion = transacciones(transaccion_buscada.transacciones.id, transaccion_buscada.transacciones.nombre, int(transaccion_buscada.transacciones.minutos),int(transaccion.attrib["cantidad"]))
                     cliente_nuevo.transacciones.agregar(nueva_transaccion)
 
             #punto_buscado.puntos.cliente.
-            #punto_buscado.puntos.escritorios.imprimir()
+            punto_buscado.puntos.escritorios.imprimir()
 
             #print(punto_buscado.puntos.nombre)
 
 
+
+
+    def activar_escritorio(self,punto_buscado):
+
+        punto_buscado.puntos.escritorios.activar_ultimo()
+
+        print("Escritorio activado con exito")
+
+    def desactivar_escritorio(self,punto_buscado):
+        
+        punto_buscado.puntos.escritorios.desactivar_ultimo()
+        print ("Escritorio desactivado con éxito")
+
+    def atender_cliente(self,punto_buscado):
+        
+        
+
+        count = 1
+        ciclo = punto_buscado.puntos.escritorios.retornar_activo()
+
+
+        cadena_id = ""
+
+        while count <= ciclo:
+            cliente_atendido = punto_buscado.puntos.cliente.retornar_sin_atender()
+            escritorio_activo = punto_buscado.puntos.escritorios.retornar_para_atender()
+            print(escritorio_activo)
+            if cliente_atendido == None:
+                print("xd") 
+                break
+            else: 
+                cliente_atendido.cliente.estado = "atendido"
+                print(escritorio_activo.escritorios.estado,":")
+                print(escritorio_activo.escritorios.calcular_tiempo(cliente_atendido.cliente.transacciones.calcular_tiempo()))
+                cliente_atendido1 = clientes(cliente_atendido.cliente.dpi,cliente_atendido.cliente.nombre,cliente_atendido.cliente.estado)
+                escritorio_activo.escritorios.cliente.agregar(cliente_atendido1)
+                print("--------------------")
+                cadena_id+=escritorio_activo.escritorios.id+","
+                count += 1
+
+        subcadena = ""
+
+        for cadena in cadena_id:
+            if cadena !=",":
+                subcadena+=cadena
+            
+            else:
+                punto_buscado.puntos.escritorios.activar_por_id(subcadena)
+                subcadena = ""
+
+                
+
+        print(cadena_id) 
+        
+
+
+
+        
+
+        
 
 
         

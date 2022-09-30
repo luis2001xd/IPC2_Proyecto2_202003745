@@ -39,22 +39,23 @@ class lista_empresa:
 
 
     def imprimir(self):
+        if self.primero == None:
+            print("nada")
         nodoaux = self.primero
-
+        x=1
+        print ("------Empresas-----")
         while nodoaux != None:
-            print("-------------------------------------------------------------------------------------------------------------")
-            print("----Información de la empresa----")
-            print("ID de la empresa:",nodoaux.empresa.id,", Nombre de la empresa:",nodoaux.empresa.nombre,", Abreviatura de la empresa:",nodoaux.empresa.abreviatura)
-            print("-----Información de los puntos de la empresa-----")
+            
             print("\n")
-            nodoaux.empresa.puntos_atencion.imprimir()
-
-            print("-----Información de las transacciones-----")
-            print("\n")
-            nodoaux.empresa.transacciones.imprimir()
-            print("-------------------------------------------------------------------------------------------------------------")
-            print("\n")
+            print("--------------------------------------------------------------------------------------------------------------------------------------------------------")
+            print("Empresa No.",str(x),":")
+            print("Nombre de la empresa:",nodoaux.empresa.nombre,", ID de la empresa:",nodoaux.empresa.id,", Abreviatura de la empresa:",nodoaux.empresa.abreviatura)
+            print("--------------------------------------------------------------------------------------------------------------------------------------------------------")
             nodoaux = nodoaux.siguiente
+            x+=1
+
+          
+
 
 
     def limpiar_sistema(self):
@@ -76,7 +77,6 @@ class lista_empresa:
                 print("Empresa no encontrada")
                 return None
         
-        print("Encontrado")
         return nodoaux
         
 

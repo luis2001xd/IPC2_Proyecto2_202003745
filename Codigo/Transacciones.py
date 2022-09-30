@@ -4,6 +4,9 @@ class transacciones:
         self.nombre = nombre
         self.minutos = minutos
         self.cantidad = cantidad
+        self.tiempo_total = 0
+
+
 
 
 class nodo_transacciones:
@@ -15,6 +18,7 @@ class nodo_transacciones:
 class lista_transacciones:
     def __init__(self):
         self.primero = None
+        self.tiempo_total = 0
 
     def agregar(self, transaccion : transacciones):
         if self.primero == None:
@@ -48,3 +52,16 @@ class lista_transacciones:
                 return None
 
         return nodoaux
+
+
+    def calcular_tiempo(self):
+        nodoaux = self.primero
+        tiempo_transaccion = 0
+
+        while nodoaux != None:
+            tiempo_transaccion = nodoaux.transacciones.cantidad* nodoaux.transacciones.minutos
+            self.tiempo_total+=tiempo_transaccion
+            nodoaux = nodoaux.siguiente
+
+        return self.tiempo_total
+

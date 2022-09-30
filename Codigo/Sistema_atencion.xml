@@ -35,6 +35,11 @@
                         <encargado>Alejandra</encargado>
                     </escritorio>
 
+                    <escritorio id="2147">
+                        <identificacion>po</identificacion>
+                        <encargado>Morales</encargado>
+                    </escritorio>
+
                 </listaEscritorios>
             </puntoAtencion>
         </listaPuntosAtencion>
@@ -48,6 +53,11 @@
             <transaccion id="2314">
                 <nombre>Transaccion 2</nombre>
                 <tiempoAtencion>20</tiempoAtencion>
+            </transaccion>
+
+            <transaccion id="2115">
+                <nombre>Transaccion 3</nombre>
+                <tiempoAtencion>5</tiempoAtencion>
             </transaccion>
         
 
@@ -67,6 +77,11 @@
                     <escritorio id="6521">
                         <identificacion>OP</identificacion>
                         <encargado>Oscar</encargado>
+                    </escritorio>
+
+                    <escritorio id="9811">
+                        <identificacion>OP</identificacion>
+                        <encargado>Luis</encargado>
                     </escritorio>
 
 
@@ -103,13 +118,13 @@
 
             <transaccion id="2314">
                 <nombre>Transaccion 2</nombre>
-                <tiempoAtencion>20</tiempoAtencion>
+                <tiempoAtencion>10</tiempoAtencion>
             </transaccion>
 
 
             <transaccion id="8564">
                 <nombre>Transaccion 9</nombre>
-                <tiempoAtencion>21</tiempoAtencion>
+                <tiempoAtencion>16</tiempoAtencion>
             </transaccion>
         </listaTransacciones>      
       

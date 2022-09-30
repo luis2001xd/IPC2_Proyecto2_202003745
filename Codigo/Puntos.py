@@ -16,6 +16,7 @@ class nodo_puntos:
 
 
 class lista_puntos:
+    
     def __init__(self):
         self.primero = None
 
@@ -45,11 +46,8 @@ class lista_puntos:
             print("\n")
             print("--------Punto No."+str(x)+"-------------")
             print ("ID del punto:",nodoaux.puntos.id,", Nombre del punto:",nodoaux.puntos.nombre,", Dirección del punto:",nodoaux.puntos.direccion)
-            print("\n")
-            print("-----Información de los escritorios del punto-----")
-            nodoaux.puntos.escritorios.imprimir()
-            nodoaux = nodoaux.siguiente
             x+=1
+            nodoaux = nodoaux.siguiente
 
 
     def buscar_punto(self, id):
@@ -65,4 +63,7 @@ class lista_puntos:
                 return None
 
         return nodoaux
+
+
+    
 

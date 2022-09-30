@@ -1,11 +1,19 @@
-for i in range (0,2):
-    print("xd")
+lista_tiempos = [25,32,12,62,51,90]
+tiempo_max = 0
+tiempo_min = 0
+for i in lista_tiempos:
+    if tiempo_max < i:
+        tiempo_max = i
 
-    for j in range (0,2):
-        print("hola")
+    if tiempo_min > i or tiempo_min == 0:
+        tiempo_min = i
 
-        for x in range (0,2):
-            print ("mundo")
+print(tiempo_max)
+print(tiempo_min)
 
-    for y in range (0,2):
-        print ("luis")
+x= "hola"
+y = "luis"
+z = "xd"
+
+if (x =="hola" or z=="xd") and y == "luisss":
+    print("ldfl")
