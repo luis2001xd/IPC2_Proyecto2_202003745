@@ -123,16 +123,17 @@ class menu:
                         print("No se encontró el punto en la empresa ")
                     
                     else: 
-                        self.manejo_puntos(punto_buscado)
+                        self.manejo_puntos(punto_buscado,empresa_buscada)
 
 
 
     
 
 
-    def manejo_puntos(self, punto_buscado):
+    def manejo_puntos(self, punto_buscado,empresa_buscada):
         opcion = ""
         punto_buscado = punto_buscado
+        empresa_buscada = empresa_buscada
        
         while opcion !=7:
             print(Fore.BLUE+Back.BLUE+"-------Bienvenido al menú de manejo de puntos-------"+Back.RESET)
@@ -145,6 +146,10 @@ class menu:
             print("6. Simular actividad del punto de atención")
             print("7. Salir")
             opcion = int(input())
+
+
+            if opcion == 1:
+                punto_buscado.puntos.escritorios.imprimir()
 
             if opcion == 2:
                 self.activar_escritorio(punto_buscado)
@@ -159,10 +164,16 @@ class menu:
                 self.atender_cliente(punto_buscado)
                 punto_buscado.puntos.escritorios.imprimir()
                 print("------------------")
-                punto_buscado.puntos.cliente.imprimir()
+                
 
             if opcion == 5:
-                punto_buscado.puntos.escritorios.imprimir()
+                self.agregar_solcitud(punto_buscado,empresa_buscada)
+
+
+            if opcion == 6:
+                punto_buscado.puntos.escritorios.imprimir_tiempos()
+
+            
                 
 
 
@@ -309,7 +320,7 @@ class menu:
                     cliente_nuevo.transacciones.agregar(nueva_transaccion)
 
             #punto_buscado.puntos.cliente.
-            punto_buscado.puntos.escritorios.imprimir()
+            #punto_buscado.puntos.escritorios.imprimir()
 
             #print(punto_buscado.puntos.nombre)
 
@@ -327,32 +338,30 @@ class menu:
         punto_buscado.puntos.escritorios.desactivar_ultimo()
         print ("Escritorio desactivado con éxito")
 
-    def atender_cliente(self,punto_buscado):
-        
-        
 
+    def atender_cliente(self,punto_buscado):
         count = 1
         ciclo = punto_buscado.puntos.escritorios.retornar_activo()
-
 
         cadena_id = ""
 
         while count <= ciclo:
             cliente_atendido = punto_buscado.puntos.cliente.retornar_sin_atender()
             escritorio_activo = punto_buscado.puntos.escritorios.retornar_para_atender()
-            print(escritorio_activo)
+            
             if cliente_atendido == None:
-                print("xd") 
                 break
             else: 
                 cliente_atendido.cliente.estado = "atendido"
-                print(escritorio_activo.escritorios.estado,":")
-                print(escritorio_activo.escritorios.calcular_tiempo(cliente_atendido.cliente.transacciones.calcular_tiempo()))
+                escritorio_activo.escritorios.calcular_max(cliente_atendido.cliente.transacciones.calcular())
+                escritorio_activo.escritorios.calcular_min(cliente_atendido.cliente.transacciones.calcular())
+                escritorio_activo.escritorios.calcular_tiempo(cliente_atendido.cliente.transacciones.calcular_tiempo())
                 cliente_atendido1 = clientes(cliente_atendido.cliente.dpi,cliente_atendido.cliente.nombre,cliente_atendido.cliente.estado)
                 escritorio_activo.escritorios.cliente.agregar(cliente_atendido1)
-                print("--------------------")
+                
+                print(cliente_atendido.cliente.transacciones.calcular_tiempo())
                 cadena_id+=escritorio_activo.escritorios.id+","
-                count += 1
+            count += 1
 
         subcadena = ""
 
@@ -361,12 +370,39 @@ class menu:
                 subcadena+=cadena
             
             else:
+                print(subcadena)
                 punto_buscado.puntos.escritorios.activar_por_id(subcadena)
                 subcadena = ""
 
+        
+
+    def agregar_solcitud(self,punto_buscado,empresa_buscada):
+
+        print("Bienvenido al menú de creación de clientes")
+        dpi= input("Introduzca el DPI: \n")
+        nombre = input ("Introduzca el nombre del cliente: \n")
+
+        cliente_nuevo = clientes(dpi,nombre,"Sin atender")
+        punto_buscado.puntos.cliente.agregar(cliente_nuevo)
+        empresa_buscada.empresa.transacciones.imprimir()
+
+        opc = ""
+
+        while opc != "F":
+            transaccion = input("Introduzca el ID de la transacción que desea realizar: \n")
+            cantidad = input ("Introduzca la cantidad que desea realizar de esta transacción: \n")
+            transaccion_buscada = empresa_buscada.empresa.transacciones.buscar_transaccion(transaccion)
+            nueva_transaccion = transacciones(transaccion_buscada.transacciones.id, transaccion_buscada.transacciones.nombre, int(transaccion_buscada.transacciones.minutos),int(cantidad))
+            cliente_nuevo.transacciones.agregar(nueva_transaccion)
+
+            print("Desea agregar otra transacción? Si desea salir del menú presione F")
+            opc = input()
+
+        
+
                 
 
-        print(cadena_id) 
+         
         
 
 

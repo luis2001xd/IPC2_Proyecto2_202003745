@@ -35,10 +35,10 @@ class lista_clientes:
         nodoaux = self.primero
 
         while nodoaux != None:
-            print("Cliente:",nodoaux.cliente.nombre,", Estado:",nodoaux.cliente.estado)
-            print("Transacciones: ")
-            nodoaux.cliente.transacciones.imprimir()
+            print("Cliente:",nodoaux.cliente.nombre,", Estado:",nodoaux.cliente.estado,", Dpi:",nodoaux.cliente.dpi)
             nodoaux = nodoaux.siguiente
+
+
 
     def retornar_sin_atender(self):
 
@@ -61,5 +61,18 @@ class lista_clientes:
         while nodoaux != None:
             if nodoaux.cliente.estado == "Sin atender":
                 contador += 1
+            nodoaux = nodoaux.siguiente
+
+
+    def contar_atendidos(self):
+        nodoaux = self.primero
+        contador_atendidos = 0
+
+        while nodoaux != None:
+            if nodoaux.cliente.estado == "atendido":
+                contador_atendidos+=1
+            nodoaux = nodoaux.siguiente
+
+        return contador_atendidos
                 
 

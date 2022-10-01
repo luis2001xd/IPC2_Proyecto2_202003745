@@ -74,7 +74,6 @@ class lista_empresa:
                 nodoaux = nodoaux.siguiente
 
             else:
-                print("Empresa no encontrada")
                 return None
         
         return nodoaux

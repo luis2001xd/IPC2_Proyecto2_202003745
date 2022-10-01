@@ -4,7 +4,6 @@
         <escritoriosActivos>
             <escritorio idEscritorio="4578"/>
             <escritorio idEscritorio="9147"/>
-            <escritorio idEscritorio="2147"/>
         </escritoriosActivos>
         <listadoClientes>
             <cliente dpi="30201868">
@@ -17,7 +16,7 @@
             <cliente dpi="35877841">
                 <nombre>Jose Castillo</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="2314" cantidad="1"/>
+                    <transaccion idTransaccion="2587" cantidad="1"/>
                     <transaccion idTransaccion="2115" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
@@ -26,14 +25,14 @@
             <cliente dpi="3587784145557">
                 <nombre>Jose Hernandez</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="2587" cantidad="2"/>
+                    <transaccion idTransaccion="2587" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
 
             <cliente dpi="5445614">
                 <nombre>Juan</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="2587" cantidad="2"/>
+                    <transaccion idTransaccion="2587" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
 
@@ -41,6 +40,46 @@
                 <nombre>Lopez</nombre>
                 <listadoTransacciones>
                     <transaccion idTransaccion="2587" cantidad="1"/>
+                    <transaccion idTransaccion="2587" cantidad="1"/>
+                    <transaccion idTransaccion="2115" cantidad="1"/>
+                </listadoTransacciones>
+            </cliente>
+
+            <cliente dpi="302018683455">
+                <nombre>Lopez2</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="3"/>
+                </listadoTransacciones>
+            </cliente>
+
+
+            <cliente dpi="165565">
+                <nombre>Morales</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="1"/>
+                </listadoTransacciones>
+            </cliente>
+
+            <cliente dpi="4354">
+                <nombre>Maria</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="4"/>
+                </listadoTransacciones>
+            </cliente>
+            
+
+            <cliente dpi="46784">
+                <nombre>Daniel</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="1"/>
+                </listadoTransacciones>
+            </cliente>
+
+            <cliente dpi="978978">
+                <nombre>Daniela</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="2"/>
+                    <transaccion idTransaccion="2115" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
 
