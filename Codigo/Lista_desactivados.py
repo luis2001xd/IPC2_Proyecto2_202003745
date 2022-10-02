@@ -1,7 +1,6 @@
-
-from Clientes import lista_clientes, clientes
-class escritorios:
-    def __init__(self,id,identificacion,encargado,estado):
+from Clientes import lista_clientes
+class escritorios_desactivados:
+    def __init__(self,id,identificacion,encargado,estado,cliente = None):
         self.id = id
         self.identificacion = identificacion
         self.encargado = encargado
@@ -51,12 +50,12 @@ class escritorios:
 
 
 class nodo_escritorios:
-    def __init__(self, escritorios : escritorios, siguiente = None,anterior = None):
+    def __init__(self, escritorios : escritorios_desactivados, siguiente = None,anterior = None):
         self.escritorios = escritorios
         self.siguiente = siguiente
         self.anterior = anterior
 
-class lista_escritorios:
+class lista_desactivados:
 
     def __init__(self):
         self.primero = None
@@ -64,9 +63,9 @@ class lista_escritorios:
         self.cadena_activados = ""
         self.cadena_desactivados = ""
 
-    def agregar(self, escritorio : escritorios):
+    def agregar(self, escritorio : escritorios_desactivados):
 
-         
+    
         if self.primero == None:
             self.primero = nodo_escritorios(escritorios=escritorio,siguiente=None)
 
@@ -103,27 +102,7 @@ class lista_escritorios:
 
 
 
-    def imprimir_activos(self):
-
-        nodoaux = self.primero
-        x=1
-        while nodoaux != None:
-            
-            if nodoaux.escritorios.estado == "desactivado":
-                nodoaux = nodoaux.siguiente
-                continue
-
-            print("------Información de escritorio No."+str(x)+"-------------")
     
-    
-            print("ID del escritorio:",nodoaux.escritorios.id,", Identificación del escritorio:",nodoaux.escritorios.identificacion,", Encargado del escritorio:",\
-                nodoaux.escritorios.encargado,",Tiempo minimo:",nodoaux.escritorios.tiempo_min,",Tiempo máximo:",nodoaux.escritorios.tiempo_max,\
-                    ", Promedio de tiempo:",nodoaux.escritorios.promedio)
-            print("Clientes atendidos en este escritorio \n")
-            nodoaux.escritorios.cliente.imprimir()
-            nodoaux = nodoaux.siguiente
-            print("\n")
-            x+=1
 
 
     def activar_por_id(self,id):
@@ -171,18 +150,7 @@ class lista_escritorios:
             else: 
                 nodoaux = nodoaux.anterior
 
-    def retornar_activo(self):
-        nodoaux = self.primero
 
-        self.numero_activos = 0
-
-        while nodoaux != None:
-            if nodoaux.escritorios.estado == "activado":
-                self.numero_activos += 1
-
-            nodoaux = nodoaux.siguiente
-        
-        return self.numero_activos
 
 
     def imprimir_tiempos(self):
@@ -194,94 +162,57 @@ class lista_escritorios:
 
     
 
-    def retornar_para_atender(self):
+    def eliminar(self, id):
+        nodoaux = self.primero
+        while nodoaux != None:
+            if nodoaux.escritorios.id == id:
+                break
+            else:
+                nodoaux = nodoaux.siguiente
+        nodo_secundario = nodoaux
+        if nodoaux == self.primero:
+            self.primero = nodoaux.siguiente
+            nodoaux.anterior = None
+            
+
+        else:
+            if nodoaux.siguiente == None:
+                nodoaux = nodoaux.anterior
+                nodoaux.siguiente = None
+            else:
+                nodoaux.siguiente.anterior = nodoaux.anterior
+                nodoaux.anterior.siguiente = nodoaux.siguiente
+
+        return nodo_secundario
+
+
+
+    def activar(self):
 
         nodoaux = self.primero
-        tiempo_menor = 0
-        id = ""
 
-        while nodoaux!= None:
-            if nodoaux.escritorios.estado == "activado":
-                tiempo_menor = nodoaux.escritorios.tiempo
-
-                break
+        if self.primero == None:
+            return None
+            
+        while nodoaux.siguiente != None:
             nodoaux = nodoaux.siguiente
-        
 
 
         while nodoaux != None:
+            if nodoaux.escritorios.estado == "desactivado":
+                nodoaux.escritorios.estado = "activado"
+                break
 
-            if nodoaux.escritorios.tiempo < tiempo_menor and nodoaux.escritorios.estado == "activado":
-                
-                tiempo_menor = nodoaux.escritorios.tiempo
-            nodoaux = nodoaux.siguiente
+            else: 
+                nodoaux = nodoaux.anterior
 
-        escritorio_elegido = self.retornar_con_menor(tiempo_menor)
-        escritorio_elegido.escritorios.estado = "desactivado"
-        print("---------")
-        print(escritorio_elegido.escritorios.id)
-        print("------------")
-        return escritorio_elegido
+        if nodoaux == None:
+            print("Ya no hay escritorios por activar")
+            return None
 
-        
-        
-
-       
-
-    def retornar_con_menor(self,tiempo_menor):
-        
-        nodoaux = self.primero
-
-        while nodoaux.escritorios.tiempo != tiempo_menor :
-            if nodoaux.siguiente != None:
-                nodoaux = nodoaux.siguiente
-
-            else:
-                return None
-
-        return nodoaux
-
-
-    def cambiar_orden(self):
-        nodoaux = self.primero
-
-        while nodoaux.siguiente != None:
-            if nodoaux == self.primero:
-                if nodoaux.escritorios.estado == "activado":
-                    nodoaux = nodoaux
-            else:
-                if nodoaux.escritorios.estado == "activado":
-                    nodo_secundario = nodoaux.anterior
-                    nodoaux.anterior = nodoaux
-                    nodoaux = nodo_secundario
-
-            nodoaux = nodoaux.siguiente
-
-
-    def retornar_desactivados(self):
-        nodoaux = self.primero
-
-        while nodoaux!= None:
-            if nodoaux.escritorios.estado=="desactivado":
-                self.cadena_desactivados+=nodoaux.escritorios.id+","
-
-            nodoaux = nodoaux.siguiente
-        return self.cadena_desactivados
-                 
-
-    def retornar_por_id(self,id):
-
-        nodoaux = self.primero
-
-        while nodoaux.escritorios.id != id:
-            if nodoaux.siguiente != None:
-                nodoaux = nodoaux.siguiente
-            else:
-                return None
-        return nodoaux
-
+        else:
+            return nodoaux
             
+    
 
-
-              
 

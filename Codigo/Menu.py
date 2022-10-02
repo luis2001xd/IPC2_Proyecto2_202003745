@@ -124,6 +124,7 @@ class menu:
                     
                     else: 
                         self.manejo_puntos(punto_buscado,empresa_buscada)
+                        
 
 
 
@@ -149,7 +150,7 @@ class menu:
 
 
             if opcion == 1:
-                punto_buscado.puntos.escritorios.imprimir()
+                punto_buscado.puntos.activos.imprimir()
 
             if opcion == 2:
                 self.activar_escritorio(punto_buscado)
@@ -162,8 +163,7 @@ class menu:
 
             if opcion == 4:
                 self.atender_cliente(punto_buscado)
-                punto_buscado.puntos.escritorios.imprimir()
-                print("------------------")
+                print("Clientes atendidos con éxito")
                 
 
             if opcion == 5:
@@ -205,6 +205,7 @@ class menu:
                     
                     escritorio_nuevo = escritorios(lista_escritorios.attrib["id"], lista_escritorios.find("identificacion").text, lista_escritorios.find("encargado").text,"desactivado")
                     punto_nuevo.escritorios.agregar(escritorio_nuevo)
+                    punto_nuevo.desactivados.agregar(escritorio_nuevo)
 
             for transaccion in nueva_empresa.iter("transaccion"):
 
@@ -267,6 +268,7 @@ class menu:
                 escritorio_nuevo = escritorios(id_escritorio,identificacion,encargado,"desactivado")
 
                 punto_nuevo.escritorios.agregar(escritorio_nuevo)
+                punto_nuevo.desactivados.agregar(escritorio_nuevo)
 
                 j+=1
             
@@ -306,8 +308,12 @@ class menu:
 
             punto_buscado = empresa_buscada.empresa.puntos_atencion.buscar_punto(config_inicial.attrib["idPunto"])
 
-            for escritorios in config_inicial.iter("escritorio"):
-                punto_buscado.puntos.escritorios.activar_por_id(escritorios.attrib["idEscritorio"])
+            for escritorio in config_inicial.iter("escritorio"):
+                punto_buscado.puntos.escritorios.activar_por_id(escritorio.attrib["idEscritorio"])
+                r = punto_buscado.puntos.desactivados.eliminar(escritorio.attrib["idEscritorio"])
+                print(type(r))
+                punto_buscado.puntos.activos.agregar(r.escritorios)
+                
 
             for cliente in config_inicial.iter("cliente"):
                 
@@ -319,6 +325,7 @@ class menu:
                     nueva_transaccion = transacciones(transaccion_buscada.transacciones.id, transaccion_buscada.transacciones.nombre, int(transaccion_buscada.transacciones.minutos),int(transaccion.attrib["cantidad"]))
                     cliente_nuevo.transacciones.agregar(nueva_transaccion)
 
+
             #punto_buscado.puntos.cliente.
             #punto_buscado.puntos.escritorios.imprimir()
 
@@ -329,37 +336,47 @@ class menu:
 
     def activar_escritorio(self,punto_buscado):
 
-        punto_buscado.puntos.escritorios.activar_ultimo()
+        nodo_activado = punto_buscado.puntos.desactivados.activar()
+        if nodo_activado == None:
+            print("Todos los escritorios de servicio han sido activados")
+            return
+        punto_buscado.puntos.desactivados.eliminar(nodo_activado.escritorios.id)
+        punto_buscado.puntos.activos.agregar(nodo_activado.escritorios)
 
         print("Escritorio activado con exito")
 
+
     def desactivar_escritorio(self,punto_buscado):
         
-        punto_buscado.puntos.escritorios.desactivar_ultimo()
+        nodo_desactivado =  punto_buscado.puntos.activos.desactivar()
+        if nodo_desactivado == None:
+            print("Todos los escritorios de servicio han sido desactivados")
+            return
+        punto_buscado.puntos.activos.eliminar(nodo_desactivado.escritorios.id)
+        punto_buscado.puntos.desactivados.agregar(nodo_desactivado.escritorios)
         print ("Escritorio desactivado con éxito")
 
 
     def atender_cliente(self,punto_buscado):
         count = 1
-        ciclo = punto_buscado.puntos.escritorios.retornar_activo()
+        ciclo = punto_buscado.puntos.activos.retornar_activo()
 
         cadena_id = ""
 
         while count <= ciclo:
             cliente_atendido = punto_buscado.puntos.cliente.retornar_sin_atender()
-            escritorio_activo = punto_buscado.puntos.escritorios.retornar_para_atender()
-            
             if cliente_atendido == None:
                 break
+            
             else: 
+                escritorio_activo = punto_buscado.puntos.activos.retornar_para_atender()
                 cliente_atendido.cliente.estado = "atendido"
                 escritorio_activo.escritorios.calcular_max(cliente_atendido.cliente.transacciones.calcular())
                 escritorio_activo.escritorios.calcular_min(cliente_atendido.cliente.transacciones.calcular())
                 escritorio_activo.escritorios.calcular_tiempo(cliente_atendido.cliente.transacciones.calcular_tiempo())
                 cliente_atendido1 = clientes(cliente_atendido.cliente.dpi,cliente_atendido.cliente.nombre,cliente_atendido.cliente.estado)
                 escritorio_activo.escritorios.cliente.agregar(cliente_atendido1)
-                
-                print(cliente_atendido.cliente.transacciones.calcular_tiempo())
+                escritorio_activo.escritorios.calcular_promedio()
                 cadena_id+=escritorio_activo.escritorios.id+","
             count += 1
 
@@ -370,8 +387,7 @@ class menu:
                 subcadena+=cadena
             
             else:
-                print(subcadena)
-                punto_buscado.puntos.escritorios.activar_por_id(subcadena)
+                punto_buscado.puntos.activos.activar_por_id(subcadena)
                 subcadena = ""
 
         
@@ -397,6 +413,10 @@ class menu:
 
             print("Desea agregar otra transacción? Si desea salir del menú presione F")
             opc = input()
+
+
+    def calcular_espera(self):
+        pass
 
         
 

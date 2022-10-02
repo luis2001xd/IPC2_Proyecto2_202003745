@@ -1,6 +1,5 @@
-
-from Clientes import lista_clientes, clientes
-class escritorios:
+from Clientes import lista_clientes
+class escritorios_activos:
     def __init__(self,id,identificacion,encargado,estado):
         self.id = id
         self.identificacion = identificacion
@@ -51,12 +50,12 @@ class escritorios:
 
 
 class nodo_escritorios:
-    def __init__(self, escritorios : escritorios, siguiente = None,anterior = None):
+    def __init__(self, escritorios : escritorios_activos, siguiente = None,anterior = None):
         self.escritorios = escritorios
         self.siguiente = siguiente
         self.anterior = anterior
 
-class lista_escritorios:
+class lista_activos:
 
     def __init__(self):
         self.primero = None
@@ -64,9 +63,9 @@ class lista_escritorios:
         self.cadena_activados = ""
         self.cadena_desactivados = ""
 
-    def agregar(self, escritorio : escritorios):
+    def agregar(self, escritorio : escritorios_activos):
 
-         
+        print()
         if self.primero == None:
             self.primero = nodo_escritorios(escritorios=escritorio,siguiente=None)
 
@@ -109,11 +108,8 @@ class lista_escritorios:
         x=1
         while nodoaux != None:
             
-            if nodoaux.escritorios.estado == "desactivado":
-                nodoaux = nodoaux.siguiente
-                continue
 
-            print("------Información de escritorio No."+str(x)+"-------------")
+            print("------Información de escritorio Activo No."+str(x)+"-------------")
     
     
             print("ID del escritorio:",nodoaux.escritorios.id,", Identificación del escritorio:",nodoaux.escritorios.identificacion,", Encargado del escritorio:",\
@@ -155,21 +151,7 @@ class lista_escritorios:
                 nodoaux = nodoaux.anterior
 
 
-    def desactivar_ultimo(self):
-        nodoaux = self.primero
-
-        while nodoaux.siguiente != None:
-            nodoaux = nodoaux.siguiente
-
-
-        while nodoaux != None:
-            if nodoaux.escritorios.estado == "activado":
-                nodoaux.escritorios.estado = "desactivado"
-                return
-
-
-            else: 
-                nodoaux = nodoaux.anterior
+    
 
     def retornar_activo(self):
         nodoaux = self.primero
@@ -203,7 +185,6 @@ class lista_escritorios:
         while nodoaux!= None:
             if nodoaux.escritorios.estado == "activado":
                 tiempo_menor = nodoaux.escritorios.tiempo
-
                 break
             nodoaux = nodoaux.siguiente
         
@@ -242,46 +223,53 @@ class lista_escritorios:
         return nodoaux
 
 
-    def cambiar_orden(self):
+    def desactivar(self):
+
         nodoaux = self.primero
+
+        if self.primero == None:
+            return None
 
         while nodoaux.siguiente != None:
-            if nodoaux == self.primero:
-                if nodoaux.escritorios.estado == "activado":
-                    nodoaux = nodoaux
+            nodoaux = nodoaux.siguiente
+
+
+        while nodoaux != None:
+            if nodoaux.escritorios.estado == "activado":
+                nodoaux.escritorios.estado = "desactivado"
+                break
+
+            else: 
+                nodoaux = nodoaux.anterior
+
+        if nodoaux == None:
+            print("Ya no hay escritorios por desactivar")
+            return None
+
+        else:
+            return nodoaux
+
+
+    def eliminar(self, id):
+        nodoaux = self.primero
+        while nodoaux != None:
+            if nodoaux.escritorios.id == id:
+                break
             else:
-                if nodoaux.escritorios.estado == "activado":
-                    nodo_secundario = nodoaux.anterior
-                    nodoaux.anterior = nodoaux
-                    nodoaux = nodo_secundario
-
-            nodoaux = nodoaux.siguiente
-
-
-    def retornar_desactivados(self):
-        nodoaux = self.primero
-
-        while nodoaux!= None:
-            if nodoaux.escritorios.estado=="desactivado":
-                self.cadena_desactivados+=nodoaux.escritorios.id+","
-
-            nodoaux = nodoaux.siguiente
-        return self.cadena_desactivados
-                 
-
-    def retornar_por_id(self,id):
-
-        nodoaux = self.primero
-
-        while nodoaux.escritorios.id != id:
-            if nodoaux.siguiente != None:
                 nodoaux = nodoaux.siguiente
+        nodo_secundario = nodoaux
+        if nodoaux == self.primero:
+            self.primero = nodoaux.siguiente
+            nodoaux.anterior = None
+        else:
+            if nodoaux.siguiente == None:
+                nodoaux = nodoaux.anterior
+                nodoaux.siguiente = None
             else:
-                return None
-        return nodoaux
+                nodoaux.siguiente.anterior = nodoaux.anterior
+                nodoaux.anterior.siguiente = nodoaux.siguiente
 
-            
+        return nodo_secundario
 
 
-              
-
+    

@@ -1,5 +1,8 @@
+import imp
 from Escritorios import lista_escritorios
 from Clientes import lista_clientes
+from Lista_activos import lista_activos
+from Lista_desactivados import lista_desactivados
 class puntos:
     def __init__(self,id,nombre,direccion):
         self.id = id
@@ -7,6 +10,12 @@ class puntos:
         self.direccion = direccion
         self.escritorios = lista_escritorios()
         self.cliente = lista_clientes ()
+        self.activos = lista_activos ()
+        self.desactivados = lista_desactivados ()
+        
+    
+    def minimo(self):
+        pass
 
 
 class nodo_puntos:
@@ -25,6 +34,7 @@ class lista_puntos:
         
         if self.primero == None:
             self.primero = nodo_puntos(puntos = puntos)
+            
 
         else: 
             nodoaux = self.primero
@@ -63,6 +73,9 @@ class lista_puntos:
                 return None
 
         return nodoaux
+
+    
+    
 
     
     
