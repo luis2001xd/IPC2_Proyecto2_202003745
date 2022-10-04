@@ -93,7 +93,7 @@ class lista_activos:
     
             print("ID del escritorio:",nodoaux.escritorios.id,", Identificación del escritorio:",nodoaux.escritorios.identificacion,", Encargado del escritorio:",\
                 nodoaux.escritorios.encargado,",Tiempo minimo:",nodoaux.escritorios.tiempo_min,",Tiempo máximo:",nodoaux.escritorios.tiempo_max,\
-                    ", Promedio de tiempo:",nodoaux.escritorios.promedio,",Estado del escritorio:",nodoaux.escritorios.estado)
+                    ", Promedio de tiempo:",nodoaux.escritorios.promedio)
             print("Clientes atendidos en este escritorio \n")
             nodoaux.escritorios.cliente.imprimir()
             nodoaux = nodoaux.siguiente
@@ -106,6 +106,8 @@ class lista_activos:
 
         nodoaux = self.primero
         x=1
+        print("---------------Información de los escritorios activos-----------------")
+        print("\n")
         while nodoaux != None:
             
 
@@ -113,9 +115,9 @@ class lista_activos:
     
     
             print("ID del escritorio:",nodoaux.escritorios.id,", Identificación del escritorio:",nodoaux.escritorios.identificacion,", Encargado del escritorio:",\
-                nodoaux.escritorios.encargado,",Tiempo minimo:",nodoaux.escritorios.tiempo_min,",Tiempo máximo:",nodoaux.escritorios.tiempo_max,\
+                nodoaux.escritorios.encargado,",Tiempo minimo:",nodoaux.escritorios.tiempo_min,"\nTiempos:\n","Tiempo máximo:",nodoaux.escritorios.tiempo_max,\
                     ", Promedio de tiempo:",nodoaux.escritorios.promedio)
-            print("Clientes atendidos en este escritorio \n")
+            print("\nClientes atendidos en este escritorio \n")
             nodoaux.escritorios.cliente.imprimir()
             nodoaux = nodoaux.siguiente
             print("\n")
@@ -123,6 +125,7 @@ class lista_activos:
 
 
     def activar_por_id(self,id):
+
         nodoaux = self.primero
 
         while nodoaux.escritorios.id != id:
@@ -135,22 +138,7 @@ class lista_activos:
         return nodoaux
          
 
-    def activar_ultimo(self):
-        nodoaux = self.primero
-
-        while nodoaux.siguiente != None:
-            nodoaux = nodoaux.siguiente
-
-        while nodoaux != None:
-            if nodoaux.escritorios.estado == "desactivado":
-                nodoaux.escritorios.estado = "activado"
-                return
-
-
-            else: 
-                nodoaux = nodoaux.anterior
-
-
+    
     
 
     def retornar_activo(self):
@@ -167,14 +155,6 @@ class lista_activos:
         return self.numero_activos
 
 
-    def imprimir_tiempos(self):
-        nodoaux = self.primero
-
-        while nodoaux != None:
-            print("Tiempo del escritorios: ",nodoaux.escritorios.tiempo, "Estado del escritorio: ",nodoaux.escritorios.estado)
-            nodoaux = nodoaux.siguiente
-
-    
 
     def retornar_para_atender(self):
 
@@ -270,6 +250,21 @@ class lista_activos:
                 nodoaux.anterior.siguiente = nodoaux.siguiente
 
         return nodo_secundario
+
+    
+    def tiempo_promedio(self,id):
+        nodoaux = self.primero
+        tiempo_promedio = 0
+
+        while nodoaux != None:
+            tiempo_promedio += nodoaux.escritorios.promedio
+            nodoaux = nodoaux.siguiente
+
+        return tiempo_promedio
+
+        
+
+
 
 
     

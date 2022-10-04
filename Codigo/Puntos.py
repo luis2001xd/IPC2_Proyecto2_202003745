@@ -12,10 +12,49 @@ class puntos:
         self.cliente = lista_clientes ()
         self.activos = lista_activos ()
         self.desactivados = lista_desactivados ()
+        self.tiempo_min_atencion = 0
+        self.tiempo_max_atencion = 0
+        self.tiempo_prom_atencion = 0
+        self.tiempo_min_espera = 0
+        self.tiempo_max_espera = 0
+        self.tiempo_prom_espera = 0
+        self.tiempo_total = 0
+        self.cantidad_activos = 0
         
     
-    def minimo(self):
-        pass
+    def minimo_atencion(self,tiempo):
+        if self.tiempo_min_atencion == 0:
+            self.tiempo_min_atencion = tiempo
+        
+        else:
+            if self.tiempo_min_atencion > tiempo:
+                self.tiempo_min_atencion = tiempo
+
+
+    def maximo_atencion(self,tiempo):
+        if self.tiempo_max_atencion == 0:
+            self.tiempo_max_atencion = tiempo
+        
+        else:
+            if tiempo > self.tiempo_max_atencion:
+                self.tiempo_max_atencion = tiempo
+
+
+    def total_tiempo(self,tiempo): 
+        self.tiempo_total += tiempo
+
+    def calcular_promedio(self, tiempo, cantidad ):
+        self.tiempo_prom_atencion = tiempo/cantidad
+
+    def minimo_espera(self,tiempo):
+        if self.tiempo_min_espera == 0:
+            self.tiempo_min_atencion = tiempo
+
+
+    def maximo_espera(self, tiempo):
+        self.tiempo_max_espera = tiempo
+
+    
 
 
 class nodo_puntos:
@@ -73,6 +112,9 @@ class lista_puntos:
                 return None
 
         return nodoaux
+
+
+    
 
     
     

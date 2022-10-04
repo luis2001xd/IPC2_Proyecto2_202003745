@@ -13,6 +13,7 @@ class nodo_clientes:
         self.siguiente = siguiente
 
 class lista_clientes:
+
     def __init__(self):
         self.primero = None
 
@@ -35,7 +36,7 @@ class lista_clientes:
         nodoaux = self.primero
 
         while nodoaux != None:
-            print("Cliente:",nodoaux.cliente.nombre,", Estado:",nodoaux.cliente.estado,", Dpi:",nodoaux.cliente.dpi)
+            print("Nombre del cliente:",nodoaux.cliente.nombre,", Estado:",nodoaux.cliente.estado,", Dpi:",nodoaux.cliente.dpi)
             nodoaux = nodoaux.siguiente
 
 
@@ -43,6 +44,9 @@ class lista_clientes:
     def retornar_sin_atender(self):
 
         nodoaux = self.primero
+
+        if self.primero == None:
+            return None
 
         while nodoaux.cliente.estado != "Sin atender":
             if nodoaux.siguiente != None:
@@ -74,5 +78,36 @@ class lista_clientes:
             nodoaux = nodoaux.siguiente
 
         return contador_atendidos
+
+    
+    def buscar_por_dpi(self,dpi):
+        nodoaux = self.primero
+
+        while nodoaux.cliente.dpi != dpi:
+            if nodoaux.siguiente != None:
+                nodoaux = nodoaux.siguiente
+
+            else:
+                return None
+
+        return nodoaux
+
+    def comprobar_ultimo(self,dpi):
+
+        nodoaux = self.primero
+
+        while nodoaux.cliente.dpi != dpi:
+            if nodoaux.siguiente != None:
+                nodoaux = nodoaux.siguiente
+
+            else:
+                return None
+
+        if nodoaux.siguiente == None:
+            return 1
+
+        else: 
+            return 0
+
                 
 

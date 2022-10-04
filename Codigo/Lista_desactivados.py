@@ -163,7 +163,13 @@ class lista_desactivados:
     
 
     def eliminar(self, id):
+
         nodoaux = self.primero
+
+        if self.primero == None:
+            print("Todos los escritorios de servicio han sido activados")
+            return None
+
         while nodoaux != None:
             if nodoaux.escritorios.id == id:
                 break
@@ -174,7 +180,6 @@ class lista_desactivados:
             self.primero = nodoaux.siguiente
             nodoaux.anterior = None
             
-
         else:
             if nodoaux.siguiente == None:
                 nodoaux = nodoaux.anterior
@@ -182,6 +187,8 @@ class lista_desactivados:
             else:
                 nodoaux.siguiente.anterior = nodoaux.anterior
                 nodoaux.anterior.siguiente = nodoaux.siguiente
+
+            
 
         return nodo_secundario
 
@@ -212,7 +219,28 @@ class lista_desactivados:
 
         else:
             return nodoaux
+
+    
+    def tiempo_promedio(self,id):
+        nodoaux = self.primero
+        tiempo_promedio = 0
+
+        while nodoaux != None:
+            tiempo_promedio += nodoaux.escritorios.promedio
+            nodoaux = nodoaux.siguiente
+
+        return tiempo_promedio
             
+
+    def retornar_desactivados(self):
+        nodoaux = self.primero
+        desactivados = 0
+
+        while nodoaux != None:
+            desactivados+=1
+            nodoaux = nodoaux.siguiente
+
+        return desactivados
     
 
 
