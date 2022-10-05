@@ -91,16 +91,14 @@ class lista_desactivados:
             print("------Información de escritorio No."+str(x)+"-------------")
     
     
-            print("ID del escritorio:",nodoaux.escritorios.id,", Identificación del escritorio:",nodoaux.escritorios.identificacion,", Encargado del escritorio:",\
+            print("ID del escritorio:",nodoaux.escritorios.id,", Encargado del escritorio:",\
                 nodoaux.escritorios.encargado,",Tiempo minimo:",nodoaux.escritorios.tiempo_min,",Tiempo máximo:",nodoaux.escritorios.tiempo_max,\
-                    ", Promedio de tiempo:",nodoaux.escritorios.promedio,",Estado del escritorio:",nodoaux.escritorios.estado)
-            print("Clientes atendidos en este escritorio \n")
+                    ", Promedio de tiempo:",nodoaux.escritorios.promedio,", Número de clientes atendidos: ",nodoaux.escritorios.cliente.contar_cliente())
+            print("\nClientes atendidos en este escritorio \n")
             nodoaux.escritorios.cliente.imprimir()
             nodoaux = nodoaux.siguiente
             print("\n")
             x+=1
-
-
 
     
 
@@ -221,7 +219,7 @@ class lista_desactivados:
             return nodoaux
 
     
-    def tiempo_promedio(self,id):
+    def tiempo_promedio(self):
         nodoaux = self.primero
         tiempo_promedio = 0
 

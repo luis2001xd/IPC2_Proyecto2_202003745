@@ -91,10 +91,10 @@ class lista_activos:
             print("------Información de escritorio No."+str(x)+"-------------")
     
     
-            print("ID del escritorio:",nodoaux.escritorios.id,", Identificación del escritorio:",nodoaux.escritorios.identificacion,", Encargado del escritorio:",\
+            print("ID del escritorio:",nodoaux.escritorios.id,", Encargado del escritorio:",\
                 nodoaux.escritorios.encargado,",Tiempo minimo:",nodoaux.escritorios.tiempo_min,",Tiempo máximo:",nodoaux.escritorios.tiempo_max,\
-                    ", Promedio de tiempo:",nodoaux.escritorios.promedio)
-            print("Clientes atendidos en este escritorio \n")
+                    ", Promedio de tiempo:",nodoaux.escritorios.promedio,", Número de clientes atendidos: ",nodoaux.escritorios.cliente.contar_cliente())
+            print("\nClientes atendidos en este escritorio \n")
             nodoaux.escritorios.cliente.imprimir()
             nodoaux = nodoaux.siguiente
             print("\n")
@@ -165,24 +165,22 @@ class lista_activos:
         while nodoaux!= None:
             if nodoaux.escritorios.estado == "activado":
                 tiempo_menor = nodoaux.escritorios.tiempo
+                nodo_secundario = nodoaux
                 break
             nodoaux = nodoaux.siguiente
         
 
-
+        nodoaux = self.primero
         while nodoaux != None:
 
             if nodoaux.escritorios.tiempo < tiempo_menor and nodoaux.escritorios.estado == "activado":
                 
                 tiempo_menor = nodoaux.escritorios.tiempo
+                nodo_secundario = nodoaux
             nodoaux = nodoaux.siguiente
 
-        escritorio_elegido = self.retornar_con_menor(tiempo_menor)
-        escritorio_elegido.escritorios.estado = "desactivado"
-        print("---------")
-        print(escritorio_elegido.escritorios.id)
-        print("------------")
-        return escritorio_elegido
+        nodo_secundario.escritorios.estado = "desactivado"
+        return nodo_secundario
 
         
         
@@ -252,7 +250,7 @@ class lista_activos:
         return nodo_secundario
 
     
-    def tiempo_promedio(self,id):
+    def tiempo_promedio(self):
         nodoaux = self.primero
         tiempo_promedio = 0
 
@@ -262,6 +260,11 @@ class lista_activos:
 
         return tiempo_promedio
 
+
+    def cadena_graficar(self):
+        nodoaux = self.primero
+
+        
         
 
 

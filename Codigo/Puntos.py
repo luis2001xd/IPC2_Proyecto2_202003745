@@ -19,7 +19,7 @@ class puntos:
         self.tiempo_max_espera = 0
         self.tiempo_prom_espera = 0
         self.tiempo_total = 0
-        self.cantidad_activos = 0
+
         
     
     def minimo_atencion(self,tiempo):
@@ -44,15 +44,24 @@ class puntos:
         self.tiempo_total += tiempo
 
     def calcular_promedio(self, tiempo, cantidad ):
-        self.tiempo_prom_atencion = tiempo/cantidad
+        if cantidad != 0:
+            self.tiempo_prom_atencion = tiempo/cantidad
+            
 
     def minimo_espera(self,tiempo):
         if self.tiempo_min_espera == 0:
-            self.tiempo_min_atencion = tiempo
+            self.tiempo_min_espera = tiempo
 
 
     def maximo_espera(self, tiempo):
         self.tiempo_max_espera = tiempo
+
+    
+    def calcular_promedio_espera (self,tiempo, cantidad):
+        if cantidad != 0:
+            self.tiempo_prom_espera = tiempo / cantidad
+
+    
 
     
 

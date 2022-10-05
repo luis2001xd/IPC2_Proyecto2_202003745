@@ -37,7 +37,7 @@ class lista_transacciones:
         nodoaux = self.primero
         print("--------Transacciones de la empresa--------")
         while nodoaux != None:
-            print("Id de la transaccion:", nodoaux.transacciones.id, ", Nombre de la transaccion:",nodoaux.transacciones.nombre,", Tiempo de la transaccion: ",nodoaux.transacciones.minutos,nodoaux.transacciones.cantidad)
+            print("Id de la transaccion:", nodoaux.transacciones.id, ", Nombre de la transaccion:",nodoaux.transacciones.nombre,", Tiempo de la transaccion: ",nodoaux.transacciones.minutos)
             nodoaux = nodoaux.siguiente
 
     def buscar_transaccion(self,id):

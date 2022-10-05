@@ -67,6 +67,8 @@ class lista_clientes:
                 contador += 1
             nodoaux = nodoaux.siguiente
 
+        return contador
+
 
     def contar_atendidos(self):
         nodoaux = self.primero
@@ -92,22 +94,35 @@ class lista_clientes:
 
         return nodoaux
 
-    def comprobar_ultimo(self,dpi):
 
+    def contar_cliente(self):
+        nodoaux = self.primero
+        contador_clientes = 0
+
+        while nodoaux != None:
+            contador_clientes += 1
+            nodoaux = nodoaux.siguiente
+
+        return contador_clientes
+
+
+    def graficar_cliente(self):
         nodoaux = self.primero
 
-        while nodoaux.cliente.dpi != dpi:
-            if nodoaux.siguiente != None:
-                nodoaux = nodoaux.siguiente
-
+        cadena = "subgraph cluster_0 {\n"
+        while nodoaux!= None:
+            if nodoaux.cliente.estado == "atendido":
+                cadena+=nodoaux.cliente.dpi+"[label="+"\""+nodoaux.cliente.nombre+"\" color = red]\n"
             else:
-                return None
+                cadena+=nodoaux.cliente.dpi+"[label="+"\""+nodoaux.cliente.nombre+"\" color = blue]\n"
 
-        if nodoaux.siguiente == None:
-            return 1
+        cadena+="}"
 
-        else: 
-            return 0
+
+    
+
+
+    
 
                 
 

@@ -154,8 +154,8 @@ class menu:
 
 
             if opcion == 1:
-                print(punto_buscado.puntos.id,punto_buscado.puntos.tiempo_min_atencion,",",punto_buscado.puntos.tiempo_max_atencion,punto_buscado.puntos.tiempo_prom_atencion)
-                punto_buscado.puntos.activos.imprimir()
+                self.mostrar_puntoatencion(punto_buscado)
+                
 
             if opcion == 2:
                 self.activar_escritorio(punto_buscado)
@@ -179,6 +179,8 @@ class menu:
                 r = 1
                 while r != None:
                     r = self.simular_atencion(punto_buscado)
+
+                self.mostrar_2(punto_buscado)
 
             
                 
@@ -389,7 +391,6 @@ class menu:
     def atender_cliente(self,punto_buscado):
         count = 1
         ciclo = punto_buscado.puntos.activos.retornar_activo()
-        print(ciclo)
         if ciclo == 0:
             print("No hay escritorios de servicio activos")
             return
@@ -427,6 +428,7 @@ class menu:
 
         subcadena = ""
         punto_buscado.puntos.minimo_espera(punto_buscado.puntos.tiempo_min_atencion)
+        punto_buscado.puntos.calcular_promedio_espera(punto_buscado.puntos.tiempo_max_atencion, punto_buscado.puntos.cliente.contar_cliente())
         
         
 
@@ -468,13 +470,11 @@ class menu:
     def simular_atencion(self,punto_buscado):
         count = 1
         ciclo = punto_buscado.puntos.activos.retornar_activo()
-        verficar = ciclo-1
         if ciclo == 0:
             print("No hay escritorios de servicio activos")
             return
 
         cadena_id = ""
-        tiempo_total = 0
 
         while count <= ciclo:
             cliente_atendido = punto_buscado.puntos.cliente.retornar_sin_atender()
@@ -507,6 +507,7 @@ class menu:
 
         subcadena = ""
         punto_buscado.puntos.minimo_espera(punto_buscado.puntos.tiempo_min_atencion)
+        punto_buscado.puntos.calcular_promedio_espera(punto_buscado.puntos.tiempo_max_atencion, punto_buscado.puntos.cliente.contar_cliente())
         
 
         for cadena in cadena_id:
@@ -522,9 +523,54 @@ class menu:
     def tiempo_promedio(self,punto_buscado):
         ciclo = punto_buscado.puntos.activos.retornar_activo()
         tiempo_promedio_activos = punto_buscado.puntos.activos.tiempo_promedio()
-        tiempo_promedio_desactivados = punto_buscado.desactivados.tiempo_promedio()
+        tiempo_promedio_desactivados = punto_buscado.puntos.desactivados.tiempo_promedio()
         tiempo_total = tiempo_promedio_activos + tiempo_promedio_desactivados
         punto_buscado.puntos.calcular_promedio(tiempo_total,ciclo)
+
+
+    def mostrar_puntoatencion(self,punto_buscado):
+        print("----Información del punto de atención-----")
+        print("ID del punto de atención:", punto_buscado.puntos.id)
+        print("Cantidad de escritorios activos:", punto_buscado.puntos.activos.retornar_activo())
+        print("Cantidad de escritorios inactivos:", punto_buscado.puntos.desactivados.retornar_desactivados())
+        print("Clientes en espera de atención:",punto_buscado.puntos.cliente.contar_sin_atender())
+        print("")
+        print("Tiempos de atención:")
+        print("Tiempo minímo de atención:",punto_buscado.puntos.tiempo_min_atencion)
+        print("Tiempo máximo de atención:",punto_buscado.puntos.tiempo_max_atencion)
+        self.tiempo_promedio(punto_buscado)
+        print("Tiempo promedio de atencion:",punto_buscado.puntos.tiempo_prom_atencion)
+        print("\n")
+        print("Tiempos de espera:")
+        print("Tiempo minímo de espera:",punto_buscado.puntos.tiempo_min_espera)
+        print("Tiempo máximo de espera:",punto_buscado.puntos.tiempo_max_espera)
+        print("Tiempo promedio de espera:",punto_buscado.puntos.tiempo_prom_espera)
+        print("\n Información de los escritorios activos del punto de atención: \n")
+        punto_buscado.puntos.activos.imprimir()
+
+
+    def mostrar_2(self,punto_buscado):
+        print("----Información del punto de atención-----")
+        print("ID del punto de atención:", punto_buscado.puntos.id)
+        print("Cantidad de escritorios activos:", punto_buscado.puntos.activos.retornar_activo())
+        print("Cantidad de escritorios inactivos:", punto_buscado.puntos.desactivados.retornar_desactivados())
+        print("Clientes en espera de atención:",punto_buscado.puntos.cliente.contar_sin_atender())
+        print("")
+        print("Tiempos de atención:")
+        print("Tiempo minímo de atención:",punto_buscado.puntos.tiempo_min_atencion)
+        print("Tiempo máximo de atención:",punto_buscado.puntos.tiempo_max_atencion)
+        self.tiempo_promedio(punto_buscado)
+        print("Tiempo promedio de atencion:",punto_buscado.puntos.tiempo_prom_atencion)
+        print("\n")
+        print("Tiempos de espera:")
+        print("Tiempo minímo de espera:",punto_buscado.puntos.tiempo_min_espera)
+        print("Tiempo máximo de espera:",punto_buscado.puntos.tiempo_max_espera)
+        print("Tiempo promedio de espera:",punto_buscado.puntos.tiempo_prom_espera)
+        print("\n Información de los escritorios activos del punto de atención: \n")
+        punto_buscado.puntos.activos.imprimir()
+        print("\n Información de los escritorios inactivos del punto de atención: \n")
+        punto_buscado.puntos.desactivados.imprimir()
+
 
 
 

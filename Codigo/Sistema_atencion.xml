@@ -64,6 +64,11 @@
                 <nombre>Transaccion 3</nombre>
                 <tiempoAtencion>5</tiempoAtencion>
             </transaccion>
+
+            <transaccion id="2214">
+                <nombre>Transaccion 4</nombre>
+                <tiempoAtencion>1</tiempoAtencion>
+            </transaccion>
         
 
         </listaTransacciones>
@@ -123,13 +128,13 @@
 
             <transaccion id="2314">
                 <nombre>Transaccion 2</nombre>
-                <tiempoAtencion>10</tiempoAtencion>
+                <tiempoAtencion>20</tiempoAtencion>
             </transaccion>
 
 
-            <transaccion id="8564">
+            <transaccion id="2115">
                 <nombre>Transaccion 9</nombre>
-                <tiempoAtencion>16</tiempoAtencion>
+                <tiempoAtencion>5</tiempoAtencion>
             </transaccion>
         </listaTransacciones>      
       

@@ -16,8 +16,7 @@
             <cliente dpi="35877841">
                 <nombre>Jose Castillo</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="2587" cantidad="1"/>
-                    <transaccion idTransaccion="2115" cantidad="1"/>
+                    <transaccion idTransaccion="2214" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
 
@@ -25,14 +24,14 @@
             <cliente dpi="3587784145557">
                 <nombre>Jose Hernandez</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="2587" cantidad="1"/>
+                    <transaccion idTransaccion="2214" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
 
             <cliente dpi="5445614">
                 <nombre>Juan</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="2587" cantidad="1"/>
+                    <transaccion idTransaccion="2214" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
 
@@ -48,7 +47,7 @@
             <cliente dpi="302018683455">
                 <nombre>Lopez2</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="2587" cantidad="3"/>
+                   <transaccion idTransaccion="2214" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
 
@@ -75,7 +74,7 @@
         </listadoClientes>
     </configInicial>
 
-    <configInicial id="1235" idEmpresa="3195" idPunto="5878">
+   <configInicial id="1235" idEmpresa="3195" idPunto="5878">
         <escritoriosActivos>
             <escritorio idEscritorio="6521"/>
         </escritoriosActivos>
