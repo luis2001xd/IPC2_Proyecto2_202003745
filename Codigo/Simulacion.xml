@@ -76,6 +76,7 @@
 
    <configInicial id="1235" idEmpresa="3195" idPunto="5878">
         <escritoriosActivos>
+            <escritorio idEscritorio="9811"/>
             <escritorio idEscritorio="6521"/>
         </escritoriosActivos>
         <listadoClientes>
@@ -83,7 +84,6 @@
                 <nombre>Jessica Morales</nombre>
                 <listadoTransacciones>
                     <transaccion idTransaccion="2587" cantidad="1"/>
-                    <transaccion idTransaccion="2314" cantidad="4"/>
                 </listadoTransacciones>
             </cliente>
 
@@ -91,7 +91,30 @@
                 <nombre>Alejandra Morales</nombre>
                 <listadoTransacciones>
                     <transaccion idTransaccion="2587" cantidad="1"/>
-                    <transaccion idTransaccion="2314" cantidad="1"/>
+                    <transaccion idTransaccion="2115" cantidad="1"/>
+                </listadoTransacciones>
+            </cliente>
+
+
+            <cliente dpi="2105823">
+                <nombre>Luisa</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="1"/>
+                </listadoTransacciones>
+            </cliente>
+
+            <cliente dpi="451235">
+                <nombre>Luisilla</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2115" cantidad="1"/>
+                </listadoTransacciones>
+            </cliente>
+
+             <cliente dpi="5678412">
+                <nombre>XD</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="2587" cantidad="2"/>
+                    <transaccion idTransaccion="2115" cantidad="1"/>
                 </listadoTransacciones>
             </cliente>
         </listadoClientes>

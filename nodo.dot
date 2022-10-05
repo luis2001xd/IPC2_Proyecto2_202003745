@@ -1,0 +1,23 @@
+digraph G { 
+fontname="Helvetica,Arial,sans-serif" 
+node [fontname="Helvetica,Arial,sans-serif"]
+edge [fontname="Helvetica,Arial,sans-serif"]
+subgraph cluster_0 {
+style = filled; 
+color = lightgrey; 
+node [style=filled,color=white shape= rectangle];
+
+label = "Clientes en espera de atencion" 
+
+}subgraph cluster_1 {
+style = filled; 
+color = lightgrey; 
+node [style=filled,color=white shape= rectangle];
+4125[label="Encargado del escritorio:Avila\n Clientes atendidos en este escritorio:\nLuis Antonio Castillo\n\nJuan\n\nLopez2\n\nMaria\n" color = lightblue]
+4578[label="Encargado del escritorio:Jessica\n Clientes atendidos en este escritorio:\nJose Castillo\n\nJose Hernandez\n\nLopez\n" color = lightblue]
+2147[label="Encargado del escritorio:Morales\n Clientes atendidos en este escritorio:\nMorales\n" color = lightblue]
+4125->4578->2147
+label = "Escritorios activos" 
+
+}
+}

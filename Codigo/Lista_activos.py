@@ -264,6 +264,36 @@ class lista_activos:
     def cadena_graficar(self):
         nodoaux = self.primero
 
+        cadena = "subgraph cluster_1 {\n"
+        cadena+= "style = filled; \n"
+        cadena+= "color = lightgrey; \n"
+        cadena+= "node [style=filled,color=white shape= rectangle];\n"
+        while nodoaux!= None:
+            if nodoaux.escritorios.estado == "activado":
+                cadena+=nodoaux.escritorios.id+"[label="+"\"Encargado del escritorio:"+nodoaux.escritorios.encargado+nodoaux.escritorios.cliente.cadena_escritorios()+"\" color = lightblue]\n"
+
+            nodoaux = nodoaux.siguiente
+
+        nodoaux = self.primero
+
+        while nodoaux != None:
+            if nodoaux.escritorios.estado == "activado":
+                if nodoaux.siguiente == None:
+                    cadena+=nodoaux.escritorios.id
+                    break
+                cadena+=nodoaux.escritorios.id+"->"
+
+            nodoaux = nodoaux.siguiente
+
+        cadena += "\nlabel = \"Escritorios activos\" \n"
+        cadena+="\n}"
+
+        return cadena
+
+
+    
+
+
         
         
 

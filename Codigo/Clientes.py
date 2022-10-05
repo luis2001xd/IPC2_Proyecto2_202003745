@@ -110,13 +110,41 @@ class lista_clientes:
         nodoaux = self.primero
 
         cadena = "subgraph cluster_0 {\n"
+        cadena+= "style = filled; \n"
+        cadena+= "color = lightgrey; \n"
+        cadena+= "node [style=filled,color=white shape= rectangle];\n"
         while nodoaux!= None:
-            if nodoaux.cliente.estado == "atendido":
+            if nodoaux.cliente.estado == "Sin atender":
                 cadena+=nodoaux.cliente.dpi+"[label="+"\""+nodoaux.cliente.nombre+"\" color = red]\n"
-            else:
-                cadena+=nodoaux.cliente.dpi+"[label="+"\""+nodoaux.cliente.nombre+"\" color = blue]\n"
 
-        cadena+="}"
+            nodoaux = nodoaux.siguiente
+
+        nodoaux = self.primero
+
+        while nodoaux != None:
+            if nodoaux.cliente.estado == "Sin atender":
+                if nodoaux.siguiente == None:
+                    cadena+=nodoaux.cliente.dpi
+                    break
+                cadena+=nodoaux.cliente.dpi+"->"
+
+            nodoaux = nodoaux.siguiente
+
+        cadena += "\nlabel = \"Clientes en espera de atencion\" \n"
+        cadena+="\n}"
+
+        return cadena
+
+
+    def cadena_escritorios(self):
+        nodoaux = self.primero
+        cadena = "\\n Clientes atendidos en este escritorio:"
+
+        while nodoaux != None:
+            cadena+="\\n"+nodoaux.cliente.nombre+"\\n"
+            nodoaux = nodoaux.siguiente
+
+        return cadena
 
 
     

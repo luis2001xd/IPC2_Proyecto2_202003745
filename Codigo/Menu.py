@@ -1,4 +1,5 @@
 
+from itertools import count
 from colorama import Back, Fore,Style
 import xml.etree.ElementTree as ET
 from Empresa import lista_empresa, empresa
@@ -7,6 +8,7 @@ from Escritorios import lista_escritorios, escritorios,nodo_escritorios
 from Transacciones import lista_transacciones, transacciones
 from Clientes import lista_clientes, clientes
 from tkinter import messagebox
+import os
 class menu:
     def __init__(self, empresa = None):
 
@@ -126,7 +128,11 @@ class menu:
                         print("No se encontró el punto en la empresa ")
                     
                     else: 
+                        print("\nClientes que serán atendidos inicialmente: ")
+                        self.atender_cliente(punto_buscado)
                         self.manejo_puntos(punto_buscado,empresa_buscada)
+                        self.graficar(punto_buscado)
+                        
                         
                         
 
@@ -155,23 +161,28 @@ class menu:
 
             if opcion == 1:
                 self.mostrar_puntoatencion(punto_buscado)
+                self.graficar(punto_buscado)
                 
 
             if opcion == 2:
                 self.activar_escritorio(punto_buscado)
+                self.graficar(punto_buscado)
                 
 
             if opcion == 3:
                 self.desactivar_escritorio(punto_buscado)
+                self.graficar(punto_buscado)
 
 
             if opcion == 4:
                 self.atender_cliente(punto_buscado)
                 print("Clientes atendidos con éxito")
+                self.graficar(punto_buscado)
                 
 
             if opcion == 5:
                 self.agregar_solcitud(punto_buscado,empresa_buscada)
+                self.graficar(punto_buscado)
 
 
             if opcion == 6:
@@ -181,6 +192,7 @@ class menu:
                     r = self.simular_atencion(punto_buscado)
 
                 self.mostrar_2(punto_buscado)
+                self.graficar(punto_buscado)
 
             
                 
@@ -337,12 +349,14 @@ class menu:
                 
                 cliente_nuevo = clientes(cliente.attrib["dpi"],cliente.find("nombre").text,"Sin atender")
                 punto_buscado.puntos.cliente.agregar(cliente_nuevo)
+                
 
                 for transaccion in cliente.iter("transaccion"):
                     transaccion_buscada = empresa_buscada.empresa.transacciones.buscar_transaccion(transaccion.attrib["idTransaccion"])
                     nueva_transaccion = transacciones(transaccion_buscada.transacciones.id, transaccion_buscada.transacciones.nombre, int(transaccion_buscada.transacciones.minutos),int(transaccion.attrib["cantidad"]))
                     cliente_nuevo.transacciones.agregar(nueva_transaccion)
 
+        
 
             #punto_buscado.puntos.cliente.
             #punto_buscado.puntos.escritorios.imprimir()
@@ -420,6 +434,10 @@ class menu:
                 punto_buscado.puntos.maximo_atencion(escritorio_activo.escritorios.tiempo_max)
                 punto_buscado.puntos.total_tiempo(cliente_atendido.cliente.transacciones.calcular())
 
+                print("-------------------------------------------------------------------------------------------------------------")
+                print("El cliente",cliente_atendido.cliente.nombre,"será atendido en el escritorio con id",escritorio_activo.escritorios.id)
+                print("-------------------------------------------------------------------------------------------------------------")
+
                 if count == ciclo:
                     punto_buscado.puntos.maximo_espera(escritorio_activo.escritorios.tiempo)
                 
@@ -464,6 +482,8 @@ class menu:
             print("Desea agregar otra transacción? Si desea salir del menú presione F")
             opc = input()
 
+        print("Tiempo promedio de espera:",punto_buscado.puntos.tiempo_prom_espera)
+        print("Cliente agregado con exito")
 
 
 
@@ -500,6 +520,9 @@ class menu:
                 punto_buscado.puntos.maximo_atencion(escritorio_activo.escritorios.tiempo_max)
                 punto_buscado.puntos.total_tiempo(cliente_atendido.cliente.transacciones.calcular())
 
+                print("-------------------------------------------------------------------------------------------------------------")
+                print("El cliente",cliente_atendido.cliente.nombre,"será atendido en el escritorio con id",escritorio_activo.escritorios.id)
+                print("-------------------------------------------------------------------------------------------------------------")
                 if count == ciclo:
                     punto_buscado.puntos.maximo_espera(escritorio_activo.escritorios.tiempo)
 
@@ -572,15 +595,26 @@ class menu:
         punto_buscado.puntos.desactivados.imprimir()
 
 
+    def graficar(self,punto_buscado):
 
-
-
-
+        grafo_principal = "digraph G { \n"
+        grafo_principal += "fontname=\"Helvetica,Arial,sans-serif\" \n"
+        grafo_principal += "node [fontname=\"Helvetica,Arial,sans-serif\"]\n"
+        grafo_principal += "edge [fontname=\"Helvetica,Arial,sans-serif\"]\n"
         
+        grafo_escritorios = punto_buscado.puntos.activos.cadena_graficar()
+        grafo_clientes = punto_buscado.puntos.cliente.graficar_cliente()
 
-                
+        grafo_principal+= grafo_clientes
+        grafo_principal += grafo_escritorios
+        grafo_principal+="\n}"
+        file = open("./nodo.dot", "w+")
+        file.write(grafo_principal)
+        file.close()
+        os.system('dot -Tpng nodo.dot -o nodo.png')
 
-         
+
+    
         
 
 
