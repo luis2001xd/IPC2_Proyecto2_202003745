@@ -128,10 +128,9 @@ class menu:
                         print("No se encontró el punto en la empresa ")
                     
                     else: 
-                        print("\nClientes que serán atendidos inicialmente: ")
-                        self.atender_cliente(punto_buscado)
-                        self.manejo_puntos(punto_buscado,empresa_buscada)
                         self.graficar(punto_buscado)
+                        self.manejo_puntos(punto_buscado,empresa_buscada)
+                        
                         
                         
                         
@@ -166,23 +165,23 @@ class menu:
 
             if opcion == 2:
                 self.activar_escritorio(punto_buscado)
-                self.graficar(punto_buscado)
+        
                 
 
             if opcion == 3:
                 self.desactivar_escritorio(punto_buscado)
-                self.graficar(punto_buscado)
+    
 
 
             if opcion == 4:
                 self.atender_cliente(punto_buscado)
                 print("Clientes atendidos con éxito")
-                self.graficar(punto_buscado)
+                
                 
 
             if opcion == 5:
                 self.agregar_solcitud(punto_buscado,empresa_buscada)
-                self.graficar(punto_buscado)
+                
 
 
             if opcion == 6:
@@ -192,7 +191,7 @@ class menu:
                     r = self.simular_atencion(punto_buscado)
 
                 self.mostrar_2(punto_buscado)
-                self.graficar(punto_buscado)
+            
 
             
                 
@@ -349,6 +348,8 @@ class menu:
                 
                 cliente_nuevo = clientes(cliente.attrib["dpi"],cliente.find("nombre").text,"Sin atender")
                 punto_buscado.puntos.cliente.agregar(cliente_nuevo)
+
+                
                 
 
                 for transaccion in cliente.iter("transaccion"):
@@ -436,6 +437,8 @@ class menu:
 
                 print("-------------------------------------------------------------------------------------------------------------")
                 print("El cliente",cliente_atendido.cliente.nombre,"será atendido en el escritorio con id",escritorio_activo.escritorios.id)
+                print("\nTransacciones que realizará el cliente:\n")
+                cliente_atendido.cliente.transacciones.imprimir_trans_clientes()
                 print("-------------------------------------------------------------------------------------------------------------")
 
                 if count == ciclo:
@@ -446,7 +449,7 @@ class menu:
 
         subcadena = ""
         punto_buscado.puntos.minimo_espera(punto_buscado.puntos.tiempo_min_atencion)
-        punto_buscado.puntos.calcular_promedio_espera(punto_buscado.puntos.tiempo_max_atencion, punto_buscado.puntos.cliente.contar_cliente())
+        punto_buscado.puntos.calcular_promedio_espera(punto_buscado.puntos.tiempo_max_espera, punto_buscado.puntos.cliente.contar_cliente())
         
         
 
@@ -522,6 +525,8 @@ class menu:
 
                 print("-------------------------------------------------------------------------------------------------------------")
                 print("El cliente",cliente_atendido.cliente.nombre,"será atendido en el escritorio con id",escritorio_activo.escritorios.id)
+                print("\nTransacciones que realizará el cliente:\n")
+                cliente_atendido.cliente.transacciones.imprimir_trans_clientes()
                 print("-------------------------------------------------------------------------------------------------------------")
                 if count == ciclo:
                     punto_buscado.puntos.maximo_espera(escritorio_activo.escritorios.tiempo)
@@ -530,7 +535,7 @@ class menu:
 
         subcadena = ""
         punto_buscado.puntos.minimo_espera(punto_buscado.puntos.tiempo_min_atencion)
-        punto_buscado.puntos.calcular_promedio_espera(punto_buscado.puntos.tiempo_max_atencion, punto_buscado.puntos.cliente.contar_cliente())
+        punto_buscado.puntos.calcular_promedio_espera(punto_buscado.puntos.tiempo_max_espera, punto_buscado.puntos.cliente.contar_cliente())
         
 
         for cadena in cadena_id:
@@ -615,10 +620,6 @@ class menu:
 
 
     
-        
-
-
-
         
 
         

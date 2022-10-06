@@ -40,6 +40,13 @@ class lista_transacciones:
             print("Id de la transaccion:", nodoaux.transacciones.id, ", Nombre de la transaccion:",nodoaux.transacciones.nombre,", Tiempo de la transaccion: ",nodoaux.transacciones.minutos)
             nodoaux = nodoaux.siguiente
 
+
+    def imprimir_trans_clientes(self):
+        nodoaux = self.primero
+        while nodoaux != None:
+            print("Id de la transaccion:", nodoaux.transacciones.id, ", Nombre de la transaccion:",nodoaux.transacciones.nombre,", Tiempo de la transaccion: ",nodoaux.transacciones.minutos)
+            nodoaux = nodoaux.siguiente
+
     def buscar_transaccion(self,id):
         nodoaux = self.primero
 

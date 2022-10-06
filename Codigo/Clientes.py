@@ -16,19 +16,24 @@ class lista_clientes:
 
     def __init__(self):
         self.primero = None
+        
 
     def agregar(self, cliente : clientes):
+        numero=1
 
         if self.primero == None:
             self.primero = nodo_clientes(cliente = cliente)
+            self.primero.cliente.numero = numero
 
         else: 
             nodoaux = self.primero
 
             while nodoaux.siguiente != None:
                 nodoaux = nodoaux.siguiente
+                numero +=1
 
             nuevo_cliente = nodo_clientes (cliente = cliente)
+            nuevo_cliente.cliente.numero = numero
             nodoaux.siguiente = nuevo_cliente
 
 
@@ -145,6 +150,8 @@ class lista_clientes:
             nodoaux = nodoaux.siguiente
 
         return cadena
+
+
 
 
     

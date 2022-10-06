@@ -60,8 +60,7 @@ class lista_activos:
     def __init__(self):
         self.primero = None
         self.numero_activos = 0
-        self.cadena_activados = ""
-        self.cadena_desactivados = ""
+        
 
     def agregar(self, escritorio : escritorios_activos):
 
